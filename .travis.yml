@@ -34,3 +34,8 @@ install:
   - yarn link
   - yarn run test
   - mvn clean package
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u="$DOCKER_HUB_USER" -p="$DOCKER_HUB_PASSWORD";
+    docker push USER/REPO;
+    fi
